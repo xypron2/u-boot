@@ -7,7 +7,6 @@ menu "TrueType Fonts"
 config CONSOLE_TRUETYPE_NIMBUS
 	bool "Nimbus Sans Regular"
 	depends on CONSOLE_TRUETYPE
-	default y
 	help
 	  Nimbus Sans L is a version of Nimbus Sans using Adobe font sources.
 	  It was designed in 1987. A subset of Nimbus Sans L were released
@@ -48,5 +47,14 @@ config CONSOLE_TRUETYPE_CANTORAONE
 	  From https://fontlibrary.org/en/font/cantora
 	  License: SIL Open Font Licence
 	  http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL
+
+config CONSOLE_TRUETYPE_DEJAVU
+	bool "DejaVu Sans Mono Regular"
+	depends on CONSOLE_TRUETYPE
+	default y
+	help
+	  This mono spaced font contains all code page 437 characters.
+	  From https://sourceforge.net/projects/dejavu/
+	  License: DejaVu Font License
 
 endmenu
