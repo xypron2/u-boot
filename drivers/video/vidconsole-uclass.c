@@ -32,7 +32,7 @@ struct vid_rgb {
 #define CONFIG_CONSOLE_SCROLL_LINES 1
 #endif
 
-int vidconsole_putc_xy(struct udevice *dev, uint x, uint y, char ch)
+int vidconsole_putc_xy(struct udevice *dev, uint x, uint y, int ch)
 {
 	struct vidconsole_ops *ops = vidconsole_get_ops(dev);
 
@@ -479,8 +479,14 @@ error:
 	priv->escape = 0;
 }
 
-/* Put that actual character on the screen (using the CP437 code page). */
-static int vidconsole_output_glyph(struct udevice *dev, char ch)
+/*
+ * vidconsole_output_glyph() - put the actual character on the screen
+ *
+ * @dev:	video device
+ * @ch:		character: Unicode for Truetype, codepage 437 otherwise
+ * Return:	0 for success
+ */
+static int vidconsole_output_glyph(struct udevice *dev, int ch)
 {
 	struct vidconsole_priv *priv = dev_get_uclass_priv(dev);
 	int ret;
@@ -505,17 +511,23 @@ static int vidconsole_output_glyph(struct udevice *dev, char ch)
 	return 0;
 }
 
-int vidconsole_put_char(struct udevice *dev, char ch)
+int vidconsole_put_char(struct udevice *dev, char c)
 {
 	struct vidconsole_priv *priv = dev_get_uclass_priv(dev);
+	int ch;
 	int ret;
 
 	if (IS_ENABLED(CONFIG_EFI_LOADER)) {
 		static char buffer[5];
 
-		ch = utf8_to_cp437_stream(ch, buffer);
+		if (IS_ENABLED(CONFIG_CONSOLE_TRUETYPE))
+			ch = utf8_to_utf32_stream(c, buffer);
+		else
+			ch = utf8_to_cp437_stream(c, buffer);
 		if (!ch)
 			return 0;
+	} else {
+		ch = c;
 	}
 
 	if (priv->escape) {
