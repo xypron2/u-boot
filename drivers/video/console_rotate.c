@@ -86,7 +86,7 @@ static int console_move_rows_1(struct udevice *dev, uint rowdst, uint rowsrc,
 	return 0;
 }
 
-static int console_putc_xy_1(struct udevice *dev, uint x_frac, uint y, char ch)
+static int console_putc_xy_1(struct udevice *dev, uint x_frac, uint y, int ch)
 {
 	struct vidconsole_priv *vc_priv = dev_get_uclass_priv(dev);
 	struct udevice *vid = dev->parent;
@@ -221,7 +221,7 @@ static int console_move_rows_2(struct udevice *dev, uint rowdst, uint rowsrc,
 	return 0;
 }
 
-static int console_putc_xy_2(struct udevice *dev, uint x_frac, uint y, char ch)
+static int console_putc_xy_2(struct udevice *dev, uint x_frac, uint y, int ch)
 {
 	struct vidconsole_priv *vc_priv = dev_get_uclass_priv(dev);
 	struct udevice *vid = dev->parent;
@@ -362,7 +362,7 @@ static int console_move_rows_3(struct udevice *dev, uint rowdst, uint rowsrc,
 	return 0;
 }
 
-static int console_putc_xy_3(struct udevice *dev, uint x_frac, uint y, char ch)
+static int console_putc_xy_3(struct udevice *dev, uint x_frac, uint y, int ch)
 {
 	struct vidconsole_priv *vc_priv = dev_get_uclass_priv(dev);
 	struct udevice *vid = dev->parent;

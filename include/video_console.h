@@ -106,7 +106,7 @@ struct vidconsole_ops {
 	 * if all is OK, -EAGAIN if we ran out of space on this line, other -ve
 	 * on error
 	 */
-	int (*putc_xy)(struct udevice *dev, uint x_frac, uint y, char ch);
+	int (*putc_xy)(struct udevice *dev, uint x_frac, uint y, int ch);
 
 	/**
 	 * move_rows() - Move text rows from one place to another

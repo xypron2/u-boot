@@ -80,7 +80,7 @@ static int console_normal_move_rows(struct udevice *dev, uint rowdst,
 }
 
 static int console_normal_putc_xy(struct udevice *dev, uint x_frac, uint y,
-				  char ch)
+				  int ch)
 {
 	struct vidconsole_priv *vc_priv = dev_get_uclass_priv(dev);
 	struct udevice *vid = dev->parent;

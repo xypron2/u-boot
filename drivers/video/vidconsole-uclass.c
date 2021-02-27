@@ -8,6 +8,7 @@
  */
 
 #include <common.h>
+#include <charset.h>
 #include <command.h>
 #include <console.h>
 #include <log.h>
@@ -508,6 +509,14 @@ int vidconsole_put_char(struct udevice *dev, char ch)
 {
 	struct vidconsole_priv *priv = dev_get_uclass_priv(dev);
 	int ret;
+
+	if (IS_ENABLED(CONFIG_EFI_LOADER)) {
+		static char buffer[5];
+
+		ch = utf8_to_cp437_stream(ch, buffer);
+		if (!ch)
+			return 0;
+	}
 
 	if (priv->escape) {
 		vidconsole_escape_char(dev, ch);
