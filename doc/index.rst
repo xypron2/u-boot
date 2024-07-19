@@ -5,6 +5,8 @@
 The U-Boot Documentation
 ========================
 
+{{ voodoo }}
+
 This is the top level of the U-Boot's documentation tree.  U-Boot
 documentation, like the U-Boot itself, is very much a work in progress;
 that is especially true as we work to integrate our many scattered
