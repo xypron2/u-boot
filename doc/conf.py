@@ -24,15 +24,11 @@ major, minor, patch = sphinx.version_info[:3]
 # Set canonical URL from the Read the Docs Domain
 html_baseurl = os.environ.get("READTHEDOCS_CANONICAL_URL", "")
 
-# Customizable context
-# https://dev.readthedocs.io/en/latest/design/theme-context.html#customizing-the-context
-html_context = dict();
-
-html_context["voodoo"] = '*** TEST BUILD ***'
-
 # Tell Jinja2 templates the build is running on Read the Docs
 if os.environ.get("READTHEDOCS", "") == "True":
-    html_context["READTHEDOCS"] = True
+    html_context = {
+        'READTHEDOCS' : True,
+    }
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
