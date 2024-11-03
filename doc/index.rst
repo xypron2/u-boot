@@ -2,6 +2,8 @@
 
 .. _u-boot_doc:
 
+Test build
+
 The U-Boot Documentation
 ========================
 
